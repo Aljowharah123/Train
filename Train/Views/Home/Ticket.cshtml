@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Ticket>
+@{
+}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1 class="alert alert-info text-center">التذاكر المتاحة  </h1>
+		     
+				  <div class="row">
+					  @foreach (var items in Model)
+			          {
+						  <div class="col">
+							  <div class="card">
+								  <div class="card-body">
+									  <div class="row">
+										  <div class="col">
+											 <ul class="list-unstyled">
+											     <li class="d-inline p-1">من</li>
+												 <li class="d-inline p-1">@items.Location1</li>
+											     <li class="d-inline p-1">ألى</li>
+											    <li class="d-inline p-1">@items.Location2</li>
+											    <li class="d-inline p-1">السعر</li>
+											    <li class="d-inline p-1">@items.Price</li>
+											 </ul>
+											<div class="row">
+												<div class="col text-center">
+												<a asp-action="Reservation" asp-route-id="@items.Id" class="btn btn-success">حجز</a>
+												</div>
+											</div>
+										  </div>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  }
+				  </div>
+			  
+
+
+		</div>
+	</div>
+</div>

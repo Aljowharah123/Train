@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Station>
+@{
+}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1 class="alert alert-info text-center">اسماء المحطات </h1> 
+			<table class="table table-striped">
+					<thead>
+					<tr class="text-center bg-secondary text-muted">
+
+							<td class="text-center">رقم المحطة</td>
+							<td class="text-center">اسم المحطة</td>
+							<td class="text-center"> الموقع</td>
+							<td class="text-center"> حجز</td>
+
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var items in Model)
+						{
+							<tr>
+								<td class="text-center">@items.Id</td>
+								<td class="text-center">@items.Name</td>
+								<td class="text-center">@items.Location</td>
+								<td class="text-center"><a href="#" class="btn btn-success">احجز في هذه المحطة</a></td>
+							</tr>
+						}
+					</tbody>
+
+				</table>
+			
+		
+			
+		</div>
+	</div>
+</div>

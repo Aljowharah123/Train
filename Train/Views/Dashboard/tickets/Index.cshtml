@@ -1,0 +1,182 @@
+﻿@model IEnumerable<Ticket>
+@{
+    Layout = "~/Views/Shared/_LayoutsAdmin.cshtml";
+    var stat = TempData["station"] as List<Station>;
+
+  
+}
+
+
+<div class="modal" tabindex="-1" id="del">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">رسالة تأكيد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>هل تريد بالتأكيد حذف هذا العنصر</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="DeleteTicket()">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="update">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"> تعديل سجل</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-5">
+                    <div class="col">
+                        <div class="card mt-5">
+                            <div class="card-body">
+                                <form asp-controller="Dashboard" asp-action="CreateNewStation" method="post">
+                                    <div class="row">
+                                        <input type="hidden" name="Id1" id="Id1" />
+                                        <div class="col">
+                                            <label class="form-label"> الرمز </label>
+                                            <input type="text" name="Name1" id="Name1" class="form-control" />
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">الموقع </label>
+                                            <input type="text" name="Location1" id="Location1" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <button type="submit">save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="confirm_deletstation()">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form asp-controller="Dashboard" asp-action="CreateNewTickets" method="post">
+                        <input type="hidden" name="PassengerName" value="Passeng" class="form-control" />
+
+                        <div class="row">
+                            <div class="col">
+                                
+                                <label class="form-label"> المحطة </label>
+                                <select class="form-select" name="TrainId">
+                                    <option>اختر المحطة</option>
+                                    @foreach (var stn in stat)
+                                    {
+                                      <option value=@stn.Id>@stn.Name</option>
+                                    } 
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">من  </label>
+                                <input type="text" name="Location1" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <label class="form-label">الى   </label>
+                                <input type="text" name="Location2" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <label class="form-label">تاريخ المغادرة   </label>
+                                <input type="date" name="IssueDate" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> سعر التذكرة   </label>
+                                <input type="number" name="Price" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit">save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form asp-action="Categories">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">
+                                    بحث - تصفية
+                                </label>
+                                <input type="text" name="Name" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-success" type="submit">بحث</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table text-center">
+                        <thead>
+                            <tt>
+                                <td> المحطة </td>
+                                <td> من   </td>
+                                <td> إلى    </td>
+                                <td> تاريخ المغادرة    </td>
+                                 
+
+                                <td>إجراء</td>
+                            </tt>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                   
+                                    <td>@item.Price</td>
+                                    @*  <td>@item.Description</td>
+                                <td>@item.Url</td> *@
+                                    <td><button class="btn btn-link" onclick="shoemsg(@item.Id)">حذف</button></td>
+                                    <td><a asp-action="UpdateStations" asp-route-id="@item.Id" class="btn btn-link">تعديل</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

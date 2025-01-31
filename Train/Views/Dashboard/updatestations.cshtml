@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Station>
+@{
+    Layout = "~/Views/Shared/_LayoutsAdmin.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form asp-controller="Dashboard" asp-action="UpdateStation" method="post">
+                        <div class="row">
+                            <input type="hidden"  value=@Model.First().Id name="Id" />
+                            <div class="col">
+                                <label class="form-label"> الرمز </label>
+                                <input type="text" name="Name" class="form-control" value=@Model.First().Name />
+                            </div>
+                            <div class="col">
+                                <label class="form-label">الموقع </label>
+                                <input type="text" name="Location" class="form-control" value=@Model.First().Location />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit">save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+   
+   
+
+</div>

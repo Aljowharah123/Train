@@ -1,0 +1,67 @@
+﻿@model Ticket
+@{
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="alert alert-info">بيانات الحجز</h1>
+        <div class="col">
+            <div class="row">
+                <div class="col-sm-8">
+                  <div class="card">
+                      <div class="card-body">
+                            <input type="hidden" name="FromDirect" value="@Model.Location1" />
+                            <input type="hidden" name="Todirect" value="@Model.Location2" />
+                            <input type="hidden" name="PassegerDate" value="@Model.IssueDate" />
+                            <input type="hidden" name="Price" value="@Model.Price" />
+                            <form asp-action="Invoice" method="get">
+                              <div class="row">
+                                  <div class="col">
+                                      <label class="form-label" for="">اسم المسافر</label>
+                                        <input type="text" class="form-control" name="PassengerName" />
+                                  </div>
+                                    <div class="col">
+                                        <label class="form-label" for="">البريد الإليكتروني</label>
+                                        <input type="text" class="form-control" name="PassengerEmail" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for=""> الهاتف</label>
+                                        <input type="text" class="form-control" name="PassengerPhone" />
+                                    </div>
+                                    
+                              </div>
+                          
+                          <div class="row">
+                              <div class="col text-center">
+                                  <button type="submit"  class="btn btn-primary">متابعة الحجز</button>
+                              </div>
+                             
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="d-inline p-2"> <strong class="text-success">من</strong> </li>
+                                <li class="d-inline"> @Model.Location1 </li>
+                                <li class="d-inline"> <strong class="text-success">إلى</strong> </li>
+                                <li class="d-inline"> @Model.Location2 </li>
+                               
+                            </ul>
+                            <p></p>
+                            <ul class="list-unstyled">
+                                <li class="d-inline"><strong class="text-success">سعر التذكرة</strong> </li>
+                                <li class="d-inline">@Model.Price </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

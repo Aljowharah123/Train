@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Ticket>
+
+@{
+}
+<div class="row mt-5">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <table class="table text-center">
+                    <thead>
+                        <tt>
+                            <td> المحطة  </td>
+                            <td>من </td>
+                            <td>الى </td>
+                            <td>إجراء</td>
+                            <td>تاريخ المغادرة </td>
+                            <td>سعر التذكرة  </td>
+                            <td colspan="2">اجراء   </td>
+                        </tt>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Location1</td>
+                                <td>@item.Location2</td>
+                                <td>@item.Price</td>
+                                <td><button class="btn btn-link" onclick="shoemsg(@item.Id)">حذف</button></td>
+                                <td><a asp-action="UpdateStations" asp-route-id="@item.Id" class="btn btn-link">تعديل</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
